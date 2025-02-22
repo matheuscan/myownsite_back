@@ -15,12 +15,15 @@ app.get('/posts/:filename', (req, res) => {
       console.error(err)
       return
     }
-    console.log(data)
-    let metadata = extractMetadata(data)
-    let content = extractContent(data)
+    if (data) {
+      console.log('File content:', data)
+      let metadata = extractMetadata(data)
+      let content = extractContent(data)
 
     console.log({metadata, content})
     res.json({metadata, content})
+    }
+    
   })
   
 })
