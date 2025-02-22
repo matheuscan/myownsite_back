@@ -1,4 +1,4 @@
-const extractMetadata = (content) => {
+function extractMetadata(content){
     let metadata = {}
     let lines = content.split('\n')
     let isMetadata = false
@@ -17,7 +17,7 @@ const extractMetadata = (content) => {
     }
     return metadata
   }
-const extractContent = (content) => {
+function extractContent(content){
     let lines = content.split('\n')
     let con = ""
     let returned_content = {}
@@ -39,5 +39,4 @@ const extractContent = (content) => {
     returned_content.content = con
     return returned_content
   }
-
-module.exports = {extractMetadata, extractContent}
+module.exports = { extractMetadata, extractContent }

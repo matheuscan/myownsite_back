@@ -1,30 +1,21 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const fs = require('node:fs')
+const fs = require('node:fs/promises')
+const { extractMetadata, extractContent } = require('./utils')
 
 app.use(cors())
-const { extractMetadata, extractContent } = require('./utils')
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-app.get('/posts/:filename', (req, res) => {
-  let fileContent =  fs.readFile(__dirname + '/posts/' + req.params.filename + '.mdx', 'utf8', (err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    if (data) {
-      console.log('File content:', data)
-      let metadata = extractMetadata(data)
-      let content = extractContent(data)
+app.get('/posts/:filename', async (req, res) => {
+  let fileContent =  await fs.readFile(`./posts/${req.params.filename}.md`, 'utf-8')
+  let metadata = extractMetadata(fileContent)
+  let content = extractContent(fileContent)
 
-    console.log({metadata, content})
-    res.json({metadata, content})
-    }
-    
-  })
+  console.log({message: "This is the data we send", metadata, content})
+  res.json({ metadata, content })
   
 })
 app.listen(3000, () => {
