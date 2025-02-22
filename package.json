@@ -1,6 +1,12 @@
 {
   "name": "myownsite_back",
   "packageManager": "yarn@4.3.1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2"
