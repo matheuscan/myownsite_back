@@ -3,3 +3,5 @@ blog-edp
 .yarn
 .editorconfig
 .pnp.cjs
+yarn.lock
+.yarnrc.yml
