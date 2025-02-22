@@ -2,11 +2,11 @@ function extractMetadata(content){
     let metadata = {}
     let lines = content.split('\n')
     let isMetadata = false
-    if (lines[0] === '---\r') {
+    if (lines[0].includes('---')) {
       isMetadata = true
       let i = 1
       while (isMetadata) {
-        if (lines[i] === '---\r') {
+        if (lines[i].includes('---')) {
           isMetadata = false
           break
         }
@@ -22,7 +22,7 @@ function extractContent(content){
     let con = ""
     let returned_content = {}
     let i = 1
-    if (lines[0] === '---\r') {
+    if (lines[0].includes('---')) {
       isMetadata = true
       while (i < lines.length) {
         
