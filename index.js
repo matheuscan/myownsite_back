@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const fs = require('fs')
+
 app.use(cors())
 const { extractMetadata, extractContent } = require('./utils')
 
