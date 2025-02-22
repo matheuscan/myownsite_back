@@ -29,7 +29,7 @@ function extractContent(content){
         if (!isMetadata) {
           con += lines[i] + '\n'
         }
-        if (lines[i] === '---\r') {
+        if (lines[i].includes('---')) {
           isMetadata = false
           
         }
