@@ -21,5 +21,16 @@ app.get('/posts/:filename', async (req, res) => {
 app.listen(3000, () => {
   console.log('Server is running at http://localhost:3000')
 })
-  
+app.get('/blog', async (req, res) => {
+  const files = await fs.readdir('./posts')
+
+  const posts = await Promise.all(
+    files.map(async (file) => {
+      const fileContent = await fs.readFile(`./posts/${file}`, 'utf-8')
+      const metadata = extractMetadata(fileContent)
+      return { metadata, filename: file }
+    })
+  ) 
+  res.json(posts)
+})
 
