@@ -22,7 +22,8 @@ app.listen(3000, () => {
   console.log('Server is running at http://localhost:3000')
 })
 app.get('/blog', async (req, res) => {
-  const files = await fs.readdir('./posts')
+  try {
+    const files = await fs.readdir('./posts')
 
   const posts = await Promise.all(
     files.map(async (file) => {
@@ -31,6 +32,10 @@ app.get('/blog', async (req, res) => {
       return { metadata, filename: file }
     })
   ) 
-  res.json(posts)
+    res.json(posts)
+  }catch(err){
+    console.log(err)
+    res.status(500).json({ message: 'Internal server error' })
+  }
 })
 
